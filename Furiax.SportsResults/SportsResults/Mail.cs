@@ -12,11 +12,13 @@ namespace SportsResults
 			bool enableSSL = true;
 
 			// fill in the emailFromAddress, password and emailToAddress before using
-			string emailFromAddress = "";
-			string password = "";
-			string emailToAddress = "";
+			string emailFromAddress = "furiaxtest@gmail.com";
+			string password = Environment.GetEnvironmentVariable("SportsResultsNotificationEmailPassword");
+			Console.WriteLine("The password is: "+ password);
+			string emailToAddress = "carlmalfliet@proximus.be";
 			string subject = "Sport results";
-			string body = $"<p>{date}</p>";
+			string body = $"Latest game(s) played in the NBA: <br>" +
+				$"<p>{date}</p>";
 
 			body += "<hr />";
 
@@ -24,6 +26,8 @@ namespace SportsResults
 			{
 				body += $"<p>{game.HomeTeam} vs {game.AwayTeam}: {game.HomeScore} - {game.AwayScore}</p>";
 			}
+
+			body += "<hr><br>Thank you for signing up to our daily NBA game result service.";
 
 			using (MailMessage mail = new MailMessage())
 			{
